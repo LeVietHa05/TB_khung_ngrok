@@ -133,8 +133,8 @@
   <!-- socketio -->
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    let LNG = 0;
-    let LAT = 0;
+    let LAT = 21.019536;
+    let LNG = 105.799487;
 
     const socket = io();
 
@@ -166,14 +166,14 @@
       currentPhoneNumber.innerHTML = `Số đang nhận: ${phone1Input.value}; ${phone2Input.value}`;
     })
     phone2btn.addEventListener('click', () => {
-      let tam = Number(phone1Input.value);
-      if (phone1Input.value == "" || phone1Input.value == null) {
+      let tam = Number(phone2Input.value);
+      if (phone2Input.value == "" || phone2Input.value == null) {
         alert("Vui lòng nhập số điện thoại");
         return;
       } else if (isNaN(tam)) {
         alert("Vui lòng nhập số điện thoại");
         return;
-      } else if (phone1Input.value.length != 10) {
+      } else if (phone2Input.value.length != 10) {
         alert("Vui lòng nhập đúng số điện thoại");
         return;
       }
@@ -187,10 +187,13 @@
       heartInfo.innerHTML = `Nhịp tim: ${data.heart} bpm`;
       spo2Info.innerHTML = `SPO2: ${data.spo2}%`;
       distanceInfo.innerHTML = `Khoảng cách đã di chuyển được: ${data.distance}cm`;
-      if (data.lng != null && data.lat != null) {
+      //for map
+      if (data.lng != null && data.lat != null && data.lng != 0 && data.lat != 0) {
         LNG = Number(data.lng);
         LAT = Number(data.lat);
       }
+
+      updateMarkerPosition(LAT, LNG);
 
       setData(tempData.datasets[0].data, data.temp);
       setData(heartData.datasets[0].data, data.heart);
@@ -203,28 +206,57 @@
         alert("Cảnh báo: Bệnh nhân cần được chăm sóc");
       }
 
+
       // myMap();
     })
   </script>
 
   <!-- google map -->
   <script>
+    let marker;
+    let map;
     function myMap() {
-      const mapProp1 = {
-        center: new google.maps.LatLng(20.99861496637506, 105.85524747787383),
+      const vuphamham = {
+        center: {
+          lat: 21.019536,
+          lng: 105.799487
+        },
         zoom: 15,
       };
-      if (LNG !== 0 && LAT !== 0) {
-        mapProp1.center = new google.maps.LatLng(LAT, LNG)
+      if (LNG !== 0 || LAT !== 0) {
+        vuphamham.center = {
+          lat: LAT,
+          lng: LNG
+        }
       }
-      const map = new google.maps.Map(
+       map = new google.maps.Map(
         document.getElementById("googleMap"),
-        mapProp1,
+        vuphamham,
         // mapProp2
       );
+
+       marker = new google.maps.Marker({
+        position: vuphamham.center,
+        map: map,
+      });
     }
+
+    function updateMarkerPosition(lat, lng) {
+      // Update the position of the marker
+      marker.setPosition({
+        lat: lat,
+        lng: lng
+      });
+
+      // Update the center of the map to the new position
+      map.panTo({
+        lat: lat,
+        lng: lng
+      });
+    }
+  
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmRAp1Vw0nUZIuwShewL3NHEu_MO52Wc8&callback=myMap"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBV0leErtS7dmiYz-zuz6xvTbWtzLq3TQ&callback=myMap"></script>
 
   <!-- chart -->
   <script>
