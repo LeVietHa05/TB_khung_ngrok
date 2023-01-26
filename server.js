@@ -20,6 +20,26 @@ app.use(express.static("public"));
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
+
+
+app.get("/sum/:a/:b", (req, res) => {
+  var a = parseInt(req.params.a);
+  var b = parseInt(req.params.b);
+  var sum = a + b;
+  res.send({
+    "tong hai so la": sum
+  })
+})
+
+app.get("/user/:userid", (req, res) => {
+  res.send({
+    userid: req.params.userid,
+    username: "leviathan",
+    phone: " 238956230560",
+    address: "vu pham ham"
+  });
+})
+
 //listen for a connection
 io.on("connection", function (socket) {
   console.log("a user connected");

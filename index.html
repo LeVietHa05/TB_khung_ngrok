@@ -191,9 +191,9 @@
       if (data.lng != null && data.lat != null && data.lng != 0 && data.lat != 0) {
         LNG = Number(data.lng);
         LAT = Number(data.lat);
+        updateMarkerPosition(LAT, LNG);
       }
 
-      updateMarkerPosition(LAT, LNG);
 
       setData(tempData.datasets[0].data, data.temp);
       setData(heartData.datasets[0].data, data.heart);
@@ -215,6 +215,7 @@
   <script>
     let marker;
     let map;
+
     function myMap() {
       const vuphamham = {
         center: {
@@ -229,13 +230,13 @@
           lng: LNG
         }
       }
-       map = new google.maps.Map(
+      map = new google.maps.Map(
         document.getElementById("googleMap"),
         vuphamham,
         // mapProp2
       );
 
-       marker = new google.maps.Marker({
+      marker = new google.maps.Marker({
         position: vuphamham.center,
         map: map,
       });
@@ -254,7 +255,6 @@
         lng: lng
       });
     }
-  
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBV0leErtS7dmiYz-zuz6xvTbWtzLq3TQ&callback=myMap"></script>
 
