@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Đăng nhập | THIẾT BỊ HỖ TRỢ VẬN ĐỘNG CHO NGƯỜI GIÀ VÀ BỆNH NHÂN PHỤC HỒI
+      SAU CHẤN THƯƠNG
+    </title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #fff9e5;
+        display: flex;
+        flex-flow: row nowrap;
+      }
+      #welcome {
+        width: 65vw;
+        height: 100vh;
+        background-color: #fc9f08;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0.1vw 0 0.5vw rgba(0, 0, 0, 0.8);
+      }
+      img {
+        width: 20vw;
+        height: 20vw;
+      }
+      h1 {
+        font-size: 2.5vw;
+        color: #000000;
+        text-align: center;
+        margin: 0;
+        width: 80%;
+      }
+      h2 {
+        font-size: 1.8vw;
+        color: #000000;
+        text-align: center;
+      }
+      p {
+        font-size: 1vw;
+        color: #000000;
+        text-align: center;
+      }
+      #loginPanel {
+        width: 35vw;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        align-self: center;
+      }
+      form {
+        width: auto;
+        outline: 2px solid black;
+        border-radius: 2vw;
+        padding: 2vw;
+        box-shadow: 0.3vw 0.3vw 0.3vw rgba(0, 0, 0, 0.8);
+        margin-top: 5vh;
+      }
+      form div {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        column-gap: 1.5vw;
+        margin-top: 1vw;
+      }
+      form div label {
+        font-size: 16pt;
+        color: #000000;
+        font-weight: bold;
+      }
+      form div input {
+        width: 12vw;
+        height: 2vw;
+        border: 0.1vw solid black;
+        border-radius: 2vw;
+        padding: 0.5vw;
+        font-size: 12pt;
+        text-align: center;
+      }
+      [type="submit"] {
+        width: 100%;
+        height: 3vw;
+        border: 0.1vw solid black;
+        border-radius: 2vw;
+        font-size: 16pt;
+        background-color: #fc9f08;
+        color: #000000;
+        font-weight: bold;
+      }
+      @media screen and (max-width: 1090px) {
+        body {
+          display: block;
+        }
+        #welcome {
+          width: 100%;
+          height: 55vh;
+          box-shadow: none;
+        }
+        img {
+          width: 30vw;
+          height: 30vw;
+        }
+        h1 {
+          font-size: 20pt;
+          width: 100%;
+        }
+        h2 {
+          font-size: 16pt;
+        }
+        p {
+          font-size: 14pt;
+        }
+        #loginPanel {
+          width: 100%;
+          margin: auto;
+          height: auto;
+          margin-top: 2vh;
+        }
+        #loginPanel form {
+          margin-top: 1vh;
+        }
+        #loginPanel form div {
+          width: 90vw;
+          margin-bottom: 2vh;
+        }
+        #loginPanel form div label {
+          font-size: 18pt;
+        }
+        #loginPanel form div input {
+          width: auto;
+          height: 3vh;
+          border-radius: 3vh;
+          font-size: 14pt;
+        }
+        [type="submit"] {
+          width: 90vw !important;
+          height: 5vh !important;
+          border-radius: 3vh !important;
+          font-size: 18pt !important;
+        }
+      }
+
+      @media screen and (max-width: 890px) {
+        header nav ul {
+          flex-flow: column;
+          padding: 0;
+          width: 90%;
+          margin: auto;
+        }
+        header nav ul li {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="welcome">
+      <img src="./vev-10.png" alt="" />
+      <h2>Chào mừng bạn tới với trình quản lý</h2>
+      <h1>
+        Thiết bị hỗ trợ vận động cho người già và bệnh nhân phục hồi sau chấn
+        thương
+      </h1>
+      <p>Đơn vị phát triển: Đội KHKT tỉnh Thái Bình</p>
+    </div>
+    <div id="loginPanel">
+      <h2>Đăng nhập</h2>
+      <form action="/login" method="POST">
+        <div class="input">
+          <label for="username">Tên đăng nhập:</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="số điện thoại của bạn"
+          />
+        </div>
+        <div class="input">
+          <label for="password">Mật khẩu:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="nhập mật khẩu của bạn"
+          />
+        </div>
+        <div class="input">
+          <input type="submit" value="Đăng nhập" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

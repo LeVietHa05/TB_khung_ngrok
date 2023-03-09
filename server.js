@@ -15,12 +15,24 @@ var io = require("socket.io")(http, {
 });
 
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 
 //serve the index.html file
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/public/index.html");
 });
 
+app.get("/login", (req, res) => {
+  res.sendFile(__dirname+ "/public/login.html");
+});
+
+
+app.post('/login', (req, res) => {
+  var { username, password } = req.body;
+  if (username === 'leviathan' && password === '123456') {
+    res.redirect('/');
+  }
+})
 
 app.get("/sum/:a/:b", (req, res) => {
   var a = parseInt(req.params.a);
