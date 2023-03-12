@@ -52,7 +52,7 @@ nav {
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
-  color: #4152A3;
+  color: #4152a3;
 }
 #logo img {
   width: auto;
@@ -170,6 +170,21 @@ nav li a:hover {
 
 #logined > h2 {
   margin: 2vw 0 1vw 3vw;
+}
+
+#moveToTop {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  position: fixed;
+  bottom: 30vh;
+  right: 1vw;
+  color: #4152a3;
+  padding: 0.1vw;
+  border-radius: 0.5vw;
 }
 #indexLevel {
   margin: auto;
@@ -475,7 +490,7 @@ footer {
   background-color: var(--normalBackground);
 }
 footer h3 {
-  color: #4152A3;
+  color: #4152a3;
 }
 footer p,
 footer li {
@@ -491,6 +506,7 @@ footer li {
 }
 /* hover button effects */
 li > a:hover,
+#moveToTop:hover,
 button:hover,
 #health > div:hover,
 #air > div:hover,

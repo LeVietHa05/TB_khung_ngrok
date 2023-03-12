@@ -139,12 +139,7 @@
         <div id="mapArea" class="area">
           <h2>Vị trí hiện tại</h2>
           <div id="map">
-            <iframe
-              src="https://www.google.com/maps/d/u/0/embed?mid=1lGqUREPQ9eW0IsJ_4UZb5e7RaXpfkds&ehbc=2E312F"
-              width="100%"
-              height="100%"
-              style="border: 0; border-radius: 2vw"
-            ></iframe>
+            <div id="googleMap"></div>
           </div>
         </div>
         <!-- bpm chart -->
@@ -354,8 +349,10 @@
     <!-- footer -->
     <footer>
       <div id="footerLeft">
-        <h2>Dự án: Thiết bị hỗ trợ vận động cho người già và bệnh nhân phục hồi sau chấn
-          thương</h2>
+        <h2>
+          Dự án: Thiết bị hỗ trợ vận động cho người già và bệnh nhân phục hồi
+          sau chấn thương
+        </h2>
         <p>Đơn vị phát triển: Đội KHKT tỉnh Thái Bình</p>
         <p>Địa chỉ: somewhere</p>
         <p>Điện thoại: 0206xxxx216</p>
@@ -366,6 +363,138 @@
     <script src="script.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- socketio -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      let LAT = 21.019536;
+      let LNG = 105.799487;
+
+      const socket = io();
+
+      const tempInfo = document.getElementById("tempInfo");
+      const heartInfo = document.getElementById("heartInfo");
+      const spo2Info = document.getElementById("spo2Info");
+      const distanceInfo = document.getElementById("distanceInfo");
+
+      const phone1Input = document.getElementById("phone1");
+      const phone2Input = document.getElementById("phone2");
+      const phone1btn = document.getElementById("phone1btn");
+      const phone2btn = document.getElementById("phone2btn");
+
+      const currentPhoneNumber = document.getElementById("currentPhoneNumber");
+
+      phone1btn.addEventListener("click", () => {
+        let tam = Number(phone1Input.value);
+        if (phone1Input.value == "" || phone1Input.value == null) {
+          alert("Vui lòng nhập số điện thoại");
+          return;
+        } else if (isNaN(tam)) {
+          alert("Vui lòng nhập số điện thoại");
+          return;
+        } else if (phone1Input.value.length != 10) {
+          alert("Vui lòng nhập đúng số điện thoại");
+          return;
+        }
+        socket.emit("phone1", phone1Input.value);
+        currentPhoneNumber.innerHTML = `Số đang nhận: ${phone1Input.value}; ${phone2Input.value}`;
+      });
+      phone2btn.addEventListener("click", () => {
+        let tam = Number(phone2Input.value);
+        if (phone2Input.value == "" || phone2Input.value == null) {
+          alert("Vui lòng nhập số điện thoại");
+          return;
+        } else if (isNaN(tam)) {
+          alert("Vui lòng nhập số điện thoại");
+          return;
+        } else if (phone2Input.value.length != 10) {
+          alert("Vui lòng nhập đúng số điện thoại");
+          return;
+        }
+        socket.emit("phone2", phone2Input.value);
+        currentPhoneNumber.innerHTML = `Số đang nhận: ${phone1Input.value}; ${phone2Input.value}`;
+      });
+
+      socket.on("message", (data) => {
+        console.log(data);
+        tempInfo.innerHTML = `Nhiệt độ: ${data.temp}°C`;
+        heartInfo.innerHTML = `Nhịp tim: ${data.heart} bpm`;
+        spo2Info.innerHTML = `SPO2: ${data.spo2}%`;
+        distanceInfo.innerHTML = `Khoảng cách đã di chuyển được: ${data.distance}cm`;
+        //for map
+        if (
+          data.lng != null &&
+          data.lat != null &&
+          data.lng != 0 &&
+          data.lat != 0
+        ) {
+          LNG = Number(data.lng);
+          LAT = Number(data.lat);
+          updateMarkerPosition(LAT, LNG);
+        }
+
+        setData(tempData.datasets[0].data, data.temp);
+        setData(heartData.datasets[0].data, data.heart);
+        setData(spo2Data.datasets[0].data, data.spo2);
+        tempChart.update();
+        heartChart.update();
+        spo2Chart.update();
+
+        if (data.notify == 1) {
+          alert("Cảnh báo: Bệnh nhân cần được chăm sóc");
+        }
+
+        // myMap();
+      });
+    </script>
+
+    <!-- google map -->
+    <script>
+      let marker;
+      let map;
+
+      function myMap() {
+        const vuphamham = {
+          center: {
+            lat: 21.019536,
+            lng: 105.799487,
+          },
+          zoom: 15,
+        };
+        if (LNG !== 0 || LAT !== 0) {
+          vuphamham.center = {
+            lat: LAT,
+            lng: LNG,
+          };
+        }
+        map = new google.maps.Map(
+          document.getElementById("googleMap"),
+          vuphamham
+          // mapProp2
+        );
+
+        marker = new google.maps.Marker({
+          position: vuphamham.center,
+          map: map,
+        });
+      }
+
+      function updateMarkerPosition(lat, lng) {
+        // Update the position of the marker
+        marker.setPosition({
+          lat: lat,
+          lng: lng,
+        });
+
+        // Update the center of the map to the new position
+        map.panTo({
+          lat: lat,
+          lng: lng,
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBV0leErtS7dmiYz-zuz6xvTbWtzLq3TQ&callback=myMap"></script>
+
     <!-- chart -->
     <script>
       var ctx_temp = document.getElementById("tempChart").getContext("2d");
