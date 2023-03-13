@@ -173,6 +173,7 @@ nav li a:hover {
   align-self: center;
   column-gap: 2vw;;
   margin-top: 1.5vh;
+  text-align: center;
 }
 
 #levelBar > div {
