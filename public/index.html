@@ -377,107 +377,6 @@
       // const spo2Info = document.getElementById("spO2Num");
       // const distanceInfo = document.getElementById("stepsNum");
 
-      // get data to show in Index
-      document.querySelector("#tempNum").innerHTML =
-        tempData.datasets[0].data[tempData.datasets[0].data.length - 1];
-      document.querySelector("#bpmNum").innerHTML =
-        heartData.datasets[0].data[heartData.datasets[0].data.length - 1];
-      document.querySelector("#spO2Num").innerHTML =
-        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1];
-      document.querySelector("#stepsNum").innerHTML =
-        distanceData.datasets[0].data[distanceData.datasets[0].data.length - 1];
-
-      // chage the color due the value
-
-      // temp
-      if (
-        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 40
-      ) {
-        document.querySelector("#temp").style.backgroundColor = "#bf0000";
-        document.querySelector("#temp").style.color = "white";
-      } else if (
-        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 39
-      ) {
-        document.querySelector("#temp").style.backgroundColor = "#f53131";
-        document.querySelector("#temp").style.color = "black";
-      } else if (
-        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 38
-      ) {
-        document.querySelector("#temp").style.backgroundColor = "#f06969";
-        document.querySelector("#temp").style.color = "black";
-      } else if (
-        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 37.5
-      ) {
-        document.querySelector("#temp").style.backgroundColor = "#ffbf00";
-        document.querySelector("#temp").style.color = "black";
-      } else if (
-        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 36
-      ) {
-        document.querySelector("#temp").style.backgroundColor = "#34b257";
-        document.querySelector("#temp").style.color = "black";
-      } else {
-        document.querySelector("#temp").style.backgroundColor = "#bf0000";
-        document.querySelector("#temp").style.color = "white";
-      }
-
-      // heart
-      if (
-        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 100
-      ) {
-        document.querySelector("#bpm").style.backgroundColor = "#bf0000";
-        document.querySelector("#bpm").style.color = "white";
-      } else if (
-        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 80
-      ) {
-        document.querySelector("#bpm").style.backgroundColor = "#f53131";
-        document.querySelector("#bpm").style.color = "black";
-      } else if (
-        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 68
-      ) {
-        document.querySelector("#bpm").style.backgroundColor = "#f06969";
-        document.querySelector("#bpm").style.color = "black";
-      } else if (
-        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 62
-      ) {
-        document.querySelector("#bpm").style.backgroundColor = "#ffbf00";
-        document.querySelector("#bpm").style.color = "black";
-      } else if (
-        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 54
-      ) {
-        document.querySelector("#bpm").style.backgroundColor = "#34b257";
-        document.querySelector("#bpm").style.color = "black";
-      } else {
-        document.querySelector("#bpm").style.backgroundColor = "#f53131";
-        document.querySelector("#bpm").style.color = "black";
-      }
-
-      // spo2
-      if (
-        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 88
-      ) {
-        document.querySelector("#spO2").style.backgroundColor = "#bf0000";
-        document.querySelector("#spO2").style.color = "white";
-      } else if (
-        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 92
-      ) {
-        document.querySelector("#spO2").style.backgroundColor = "#f53131";
-        document.querySelector("#spO2").style.color = "black";
-      } else if (
-        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 95
-      ) {
-        document.querySelector("#spO2").style.backgroundColor = "#ffbf00";
-        document.querySelector("#spO2").style.color = "black";
-      } else if (
-        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 100
-      ) {
-        document.querySelector("#spO2").style.backgroundColor = "#34b257";
-        document.querySelector("#spO2").style.color = "black";
-      } else {
-        document.querySelector("#spO2").style.backgroundColor = "#bf0000";
-        document.querySelector("#spO2").style.color = "white";
-        document.querySelector("#spO2Num").innerHTML = "N/A";
-      }
-
       const phone1Input = document.getElementById("phone1");
       const phone2Input = document.getElementById("phone2");
       const phone1btn = document.getElementById("phone1btn");
@@ -693,6 +592,109 @@
       function setData(dataset, data) {
         dataset.push(data);
         dataset.shift();
+      }
+    </script>
+
+    <script>
+      // get data to show in Index
+      document.querySelector("#tempNum").innerHTML =
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1];
+      document.querySelector("#bpmNum").innerHTML =
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1];
+      document.querySelector("#spO2Num").innerHTML =
+        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1];
+      document.querySelector("#stepsNum").innerHTML =
+        distanceData.datasets[0].data[distanceData.datasets[0].data.length - 1];
+
+      // chage the color due the value
+
+      // temp
+      if (
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 40
+      ) {
+        document.querySelector("#temp").style.backgroundColor = "#bf0000";
+        document.querySelector("#temp").style.color = "white";
+      } else if (
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 39
+      ) {
+        document.querySelector("#temp").style.backgroundColor = "#f53131";
+        document.querySelector("#temp").style.color = "black";
+      } else if (
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 38
+      ) {
+        document.querySelector("#temp").style.backgroundColor = "#f06969";
+        document.querySelector("#temp").style.color = "black";
+      } else if (
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 37.5
+      ) {
+        document.querySelector("#temp").style.backgroundColor = "#ffbf00";
+        document.querySelector("#temp").style.color = "black";
+      } else if (
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 36
+      ) {
+        document.querySelector("#temp").style.backgroundColor = "#34b257";
+        document.querySelector("#temp").style.color = "black";
+      } else {
+        document.querySelector("#temp").style.backgroundColor = "#bf0000";
+        document.querySelector("#temp").style.color = "white";
+      }
+
+      // heart
+      if (
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 100
+      ) {
+        document.querySelector("#bpm").style.backgroundColor = "#bf0000";
+        document.querySelector("#bpm").style.color = "white";
+      } else if (
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 80
+      ) {
+        document.querySelector("#bpm").style.backgroundColor = "#f53131";
+        document.querySelector("#bpm").style.color = "black";
+      } else if (
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 68
+      ) {
+        document.querySelector("#bpm").style.backgroundColor = "#f06969";
+        document.querySelector("#bpm").style.color = "black";
+      } else if (
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 62
+      ) {
+        document.querySelector("#bpm").style.backgroundColor = "#ffbf00";
+        document.querySelector("#bpm").style.color = "black";
+      } else if (
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 54
+      ) {
+        document.querySelector("#bpm").style.backgroundColor = "#34b257";
+        document.querySelector("#bpm").style.color = "black";
+      } else {
+        document.querySelector("#bpm").style.backgroundColor = "#f53131";
+        document.querySelector("#bpm").style.color = "black";
+      }
+
+      // spo2
+      if (
+        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 88
+      ) {
+        document.querySelector("#spO2").style.backgroundColor = "#bf0000";
+        document.querySelector("#spO2").style.color = "white";
+      } else if (
+        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 92
+      ) {
+        document.querySelector("#spO2").style.backgroundColor = "#f53131";
+        document.querySelector("#spO2").style.color = "black";
+      } else if (
+        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 95
+      ) {
+        document.querySelector("#spO2").style.backgroundColor = "#ffbf00";
+        document.querySelector("#spO2").style.color = "black";
+      } else if (
+        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 100
+      ) {
+        document.querySelector("#spO2").style.backgroundColor = "#34b257";
+        document.querySelector("#spO2").style.color = "black";
+      } else {
+        document.querySelector("#spO2").style.backgroundColor = "#bf0000";
+        document.querySelector("#spO2").style.color = "white";
+        document.querySelector("#spO2Num").innerHTML = "N/A";
       }
     </script>
 
