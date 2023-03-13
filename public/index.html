@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="domHTML.css" />
+    <title>
+      Trình quản lý Thiết bị Khung hỗ trợ vận động cho người Già và người phục
+      hồi sau chấn thương
+    </title>
+    <script
+      type="module"
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js"
+      integrity="sha512-tQYZBKe34uzoeOjY9jr3MX7R/mo7n25vnqbnrkskGr4D6YOoPYSpyafUAzQVjV6xAozAqUFIEFsCO4z8mnVBXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div id="logo">
+          <img src="vev-10.png" alt="" />
+          <div>
+            <p style="font-size: 2vw">Trình quản lý</p>
+            <p>Thiết bị Hỗ trợ vận động</p>
+          </div>
+        </div>
+        <ul>
+          <li><a href="#tab1" class="active">Trang chủ</a></li>
+          <li><a href="#tab2">Bài tập hồi phục</a></li>
+          <li><a href="#tab3">Chế độ dinh dưỡng</a></li>
+          <li><a href="#tab4">Giới thiệu</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- main -->
+    <div class="tab-content">
+      <div id="tab1" class="tab-pane active">
+        <!-- <link rel="stylesheet" href="homepage.css" /> -->
+        <!-- banner -->
+        <div id="banner">
+          <!-- news area -->
+          <div id="news">This is news</div>
+          <!-- index area -->
+          <div id="index">
+            <div id="inIndex">
+              <h2>Trình trạng hiện tại:</h2>
+
+              <div id="indexData">
+                <div id="bpm">
+                  <span class="material-symbols-outlined"> cardiology </span>
+                  <div
+                    style="
+                      display: flex;
+                      flex-flow: row nowrap;
+                      gap: 0.5vw;
+                      align-items: baseline;
+                    "
+                  >
+                    <p class="indexDataLabels">Nhịp tim:</p>
+                    <div id="bpmNum" class="indexDataNum">60</div>
+                    <p class="indexDataUnit">nhịp/phút</p>
+                  </div>
+                </div>
+                <div id="spO2">
+                  <span class="material-symbols-outlined"> spo2 </span>
+                  <div
+                    style="
+                      display: flex;
+                      flex-flow: row nowrap;
+                      gap: 0.5vw;
+                      align-items: baseline;
+                    "
+                  >
+                    <p class="indexDataLabels">SPO2:</p>
+                    <div id="spO2Num" class="indexDataNum">90</div>
+                    <p class="indexDataUnit">%</p>
+                  </div>
+                </div>
+
+                <div id="temp">
+                  <span class="material-symbols-outlined">
+                    device_thermostat
+                  </span>
+                  <div
+                    style="
+                      display: flex;
+                      flex-flow: row nowrap;
+                      gap: 0.5vw;
+                      align-items: baseline;
+                    "
+                  >
+                    <p class="indexDataLabels">Nhiệt độ:</p>
+                    <div id="tempNum" class="indexDataNum">37.8</div>
+                    <p class="indexDataUnit">°C</p>
+                  </div>
+                </div>
+
+                <div id="steps">
+                  <span class="material-symbols-outlined"> footprint </span>
+                  <div
+                    style="
+                      display: flex;
+                      flex-flow: row nowrap;
+                      gap: 0.5vw;
+                      align-items: baseline;
+                    "
+                  >
+                    <p class="indexDataLabels">Di chuyển:</p>
+                    <div id="stepsNum" class="indexDataNum">2000</div>
+                    <p class="indexDataUnit">m</p>
+                  </div>
+                </div>
+              </div>
+              <!-- the lever bar -->
+              <div id="levelBar">
+                <p>Bình thường</p>
+                <div id="theLevel">
+                  <div title="normal"></div>
+                  <div title="medium"></div>
+                  <div title="high1"></div>
+                  <div title="high2"></div>
+                  <div title="high3"></div>
+                </div>
+                <p>Nguy hiểm</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- maps -->
+        <div id="mapArea" class="area">
+          <h2>Vị trí hiện tại</h2>
+          <div id="map">
+            <div id="googleMap"></div>
+          </div>
+        </div>
+        <!-- bpm chart -->
+
+        <div id="bpmChartArea" class="area">
+          <h2>Nhịp tim</h2>
+          <canvas
+            class="my-4 w-100 chartjs-render-monitor"
+            id="heartChart"
+          ></canvas>
+        </div>
+
+        <!-- spO2 chart -->
+        <div id="spO2ChartArea" class="area">
+          <h2>SPO2</h2>
+          <canvas
+            class="my-4 w-100 chartjs-render-monitor"
+            id="spo2cChart"
+          ></canvas>
+        </div>
+
+        <!-- temp chart -->
+        <div id="tempChartArea" class="area">
+          <h2>Nhiệt độ</h2>
+          <canvas
+            class="my-4 w-100 chartjs-render-monitor"
+            id="tempChart"
+          ></canvas>
+        </div>
+
+        <!-- setting -->
+        <div id="setting">
+          <div id="inSetting">
+            <h2>Cài đặt</h2>
+            <!-- currentPhone -->
+            <div>
+              <h2>Số điện thoại đang nhận cảnh báo:</h2>
+              <h2 id="currentPhoneNumber">0369677432</h2>
+            </div>
+            <!-- changePhone -->
+
+            <div>
+              <h2>Đổi số điện thoại nhận cảnh báo:</h2>
+              <div>
+                <input
+                  type="number"
+                  id="newPhoneNumber"
+                  name="newPhoneNumber"
+                  placeholder="Nhập số thay thế"
+                />
+                <button
+                  type="button"
+                  id="phone1btn"
+                  class="btn btn-primary"
+                  style="background-color: #f53131"
+                >
+                  Sửa
+                </button>
+              </div>
+            </div>
+            <div>
+              <h2>Thêm số nhận cảnh báo (thêm 1 số):</h2>
+              <div>
+                <input
+                  type="text"
+                  id="phone2"
+                  name="phone2"
+                  placeholder="Nhập thêm số"
+                />
+                <button
+                  type="button"
+                  id="phone2btn"
+                  class="btn btn-danger"
+                  style="background-color: #34b257"
+                >
+                  Thêm
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="tab2" class="tab-pane">
+        <h2>Bệnh nhân phục hồi sau chấn thương:</h2>
+        <h3>Bài tập 1: Nâng chân đơn</h3>
+        <p>
+          Tác dụng: Nâng chân đơn nhằm tăng cường cơ bắp xung quanh khu vực đầu
+          gối
+        </p>
+        <p>Thực hiện: Ngồi trên ghế, hai chân cong góc 90 độ</p>
+        <p>
+          Bước 1: Nâng chân phải từ từ lên sao cho song song với mặt sàn nhà,
+          chân trái giữ trên mặt đất
+        </p>
+        <p>
+          Bước 2: Giữ trong 30 giây rồi hạ dần chân phải xuống và lặp lại với
+          chân trái. Thực hiện 10 lần như thế và 2 lần/ngày.
+        </p>
+        <h3>Bài tập 2: Vặn mình</h3>
+        <p>
+          Tác dụng: Kéo giãn cột sống và thắt lưng. Đồng thời giảm nhức mỏi và
+          đau ở lưng, tăng cường độ chắc khỏe của cột sống
+        </p>
+        <p>Thực hiện: Bạn nằm thẳng trên giường hoặc sàn nhà.</p>
+        <p>
+          Bước 1: Gập hai đầu gối 90 độ, hai bàn chân chống xuống sàn và hai tay
+          bắt chéo sau gáy.
+        </p>
+        <p>
+          Bước 2: Chân trái bắt chéo sang chân bên phải rồi ép sát đầu gối chân
+          phải vào thành giường. Giữ trong vòng 15 giây
+        </p>
+        <p>Bước 3: Trở về tư thế ban đầu, đổi chân và thực hiện tương tự</p>
+        <h3>Bài tập 3: Gập gối</h3>
+        <p>Tác dụng: Tăng độ giãn và săn chắc ở phần gối, lưng cổ</p>
+        <p>
+          Thực hiện: Nằm thẳng trên giường hoặc sàn, hai bàn chân chống lên mặt
+          sàn
+        </p>
+        <p>Bước 1: Gập gối trái vào sát thân mình</p>
+        <p>
+          Bước 2: Nâng cổ và vai lên rồi ép sát cằm vào đầu gối, giữ 15 giây
+        </p>
+        <p>
+          Bước 3: Đưa chân trái về vị trí ban đầu, tiếp đến đổi sang chân phải.
+          Tập luyện ngày 2 lần, mỗi lần 15 phút.
+        </p>
+        <h3>Bài tập 4: Squat một nửa</h3>
+        <p>Bước 1: Đứng thẳng, 2 chân rộng bằng vai.</p>
+        <p>Bước 2: Duỗi thẳng 2 tay ra trước hoặc chắp hoa sen.</p>
+        <p>Bước 3: Từ từ khuỵu gối xuống thành tư thế nửa ngồi.</p>
+        <p>Bước 4: Giữ lưng thẳng, không chúi người về phía trước.</p>
+        <p>
+          Bước 5: Duy trì tư thế nửa ngồi trong 5 giây rồi từ từ trở về tư thế
+          ban đầu. (Thực hiện bài tập 3 đợt, mỗi đợt 10 lần)
+        </p>
+        <h2>Người già:</h2>
+        <h3>Bài tập căng ngực:</h3>
+        <ol>
+          <li>Ngồi thẳng lưng trên ghế.</li>
+          <li>Kéo hai tay trở ngược về phía sau.</li>
+          <li>Nhẹ nhàng đẩy ngực đến khi ngực căng, giữ trong 5 giây.</li>
+        </ol>
+        <h3>Bài tập xoay cơ thể</h3>
+        <ol>
+          <li>Ngồi thẳng lưng trên ghế.</li>
+          <li>Hai tay dang rộng ngang vai.</li>
+          <li>
+            Cố gắng giữ hông cố định và xoay cánh tay sang trái, giữ yên trong 5
+            giây.
+          </li>
+          <li>Lặp lại với bên kia.</li>
+        </ol>
+        <h3>Căng mắt cá chân</h3>
+        <ol>
+          <li>Ngồi trên mặt phẳng, duỗi thẳng hai chân.</li>
+          <li>Từ từ nâng chân trái lên, đồng thời căng mắt cá chân.</li>
+          <li>Xoa bóp các ngón chân khoảng 5 đến 10 lần.</li>
+          <li>Lặp lại với chân kia.</li>
+        </ol>
+        <h3>Bài tập co giãn chân</h3>
+        <ol>
+          <li>Đứng thẳng người.</li>
+          <li>Từ từ khụy chân phải, chân trái bước lùi ra sau.</li>
+          <li>Giữ chân trái càng thẳng càng tốt.</li>
+          <li>Lặp lại với chân kia.</li>
+        </ol>
+        <h3>Mini squat</h3>
+        <ol>
+          <li>
+            Đặt hai tay lên lưng ghế, đứng thẳng người, chân dang rộng bằng
+            hông.
+          </li>
+          <li>
+            Từ từ uốn cong đầu gối đến khi song song với ngón chân cái. Luôn giữ
+            thẳng lưng.
+          </li>
+          <li>Nhẹ nhàng đứng lên.</li>
+        </ol>
+      </div>
+      <div id="tab3" class="tab-pane">
+        <h2>Chế độ Dinh dưỡng dành cho người phục hồi sau chấn thương</h2>
+        <p>
+          Sữa và các chế phẩm từ sữa là thực phẩm rất tốt cho sức khỏe. Sau khi
+          phẫu thuật đứt dây chằng, người bệnh cần bổ sung nhiều sữa mỗi ngày.(
+          nên uống 400 - 600ml/ngày)
+        </p>
+        <p>
+          Người bệnh nên bổ sung các loại thực phẩm giàu vitamin như rau xanh,
+          các loại trái cây tươi.( 400 - 500g rau xanh và hoa quả chín)
+        </p>
+        <p>
+          Người bệnh cần bổ sung những thực phẩm giàu đạm mỗi ngày như thịt, cá,
+          sữa, trứng, hải sản, các loại đậu…
+        </p>
+        <p>
+          Các thực phẩm giàu axit béo omega-3 mà người bệnh có thể bổ sung trong
+          bữa ăn hằng ngày như cá thu, cá hồi, cá trích…
+        </p>
+      </div>
+      <div id="tab4" class="tab-pane">
+        <h2>Tab 4 Content</h2>
+        <p>This is the content for tab 4.</p>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <footer>
+      <div id="footerLeft">
+        <h2>
+          Dự án: Thiết bị hỗ trợ vận động cho người già và bệnh nhân phục hồi
+          sau chấn thương
+        </h2>
+        <p>Đơn vị phát triển: Đội KHKT tỉnh Thái Bình</p>
+        <p>Địa chỉ: somewhere</p>
+        <p>Điện thoại: 0206xxxx216</p>
+        <a href="mailto:"></a>
+      </div>
+    </footer>
+    <!-- script -->
+    <script src="script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- socketio -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      let LAT = 21.019536;
+      let LNG = 105.799487;
+
+      const socket = io();
+
+      // const tempInfo = document.getElementById("tempNum");
+      // const heartInfo = document.getElementById("bpmNum");
+      // const spo2Info = document.getElementById("spO2Num");
+      // const distanceInfo = document.getElementById("stepsNum");
+
+      const phone1Input = document.getElementById("phone1");
+      const phone2Input = document.getElementById("phone2");
+      const phone1btn = document.getElementById("phone1btn");
+      const phone2btn = document.getElementById("phone2btn");
+
+      const currentPhoneNumber = document.getElementById("currentPhoneNumber");
+
+      phone1btn.addEventListener("click", () => {
+        let tam = Number(phone1Input.value);
+        if (phone1Input.value == "" || phone1Input.value == null) {
+          alert("Vui lòng nhập số điện thoại");
+          return;
+        } else if (isNaN(tam)) {
+          alert("Vui lòng nhập số điện thoại");
+          return;
+        } else if (phone1Input.value.length != 10) {
+          alert("Vui lòng nhập đúng số điện thoại");
+          return;
+        }
+        socket.emit("phone1", phone1Input.value);
+        currentPhoneNumber.innerHTML = `Số đang nhận: ${phone1Input.value}; ${phone2Input.value}`;
+      });
+      phone2btn.addEventListener("click", () => {
+        let tam = Number(phone2Input.value);
+        if (phone2Input.value == "" || phone2Input.value == null) {
+          alert("Vui lòng nhập số điện thoại");
+          return;
+        } else if (isNaN(tam)) {
+          alert("Vui lòng nhập số điện thoại");
+          return;
+        } else if (phone2Input.value.length != 10) {
+          alert("Vui lòng nhập đúng số điện thoại");
+          return;
+        }
+        socket.emit("phone2", phone2Input.value);
+        currentPhoneNumber.innerHTML = `Số đang nhận: ${phone1Input.value}; ${phone2Input.value}`;
+      });
+
+      socket.on("message", (data) => {
+        console.log(data);
+        // tempInfo.innerHTML = data.temp;
+        // heartInfo.innerHTML = data.heart;
+        // spo2Info.innerHTML = data.spo2;
+        // distanceInfo.innerHTML = data.distance;
+        //for map
+        if (
+          data.lng != null &&
+          data.lat != null &&
+          data.lng != 0 &&
+          data.lat != 0
+        ) {
+          LNG = Number(data.lng);
+          LAT = Number(data.lat);
+          updateMarkerPosition(LAT, LNG);
+        }
+
+        setData(tempData.datasets[0].data, data.temp);
+        setData(heartData.datasets[0].data, data.heart);
+        setData(spo2Data.datasets[0].data, data.spo2);
+        tempChart.update();
+        heartChart.update();
+        spo2Chart.update();
+
+        if (data.notify == 1) {
+          alert("Cảnh báo: Bệnh nhân cần được chăm sóc");
+        }
+
+        // myMap();
+      });
+    </script>
+
+    <!-- google map -->
+    <script>
+      let marker;
+      let map;
+
+      function myMap() {
+        const vuphamham = {
+          center: {
+            lat: 21.019536,
+            lng: 105.799487,
+          },
+          zoom: 15,
+        };
+        if (LNG !== 0 || LAT !== 0) {
+          vuphamham.center = {
+            lat: LAT,
+            lng: LNG,
+          };
+        }
+        map = new google.maps.Map(
+          document.getElementById("googleMap"),
+          vuphamham
+          // mapProp2
+        );
+
+        marker = new google.maps.Marker({
+          position: vuphamham.center,
+          map: map,
+        });
+      }
+
+      function updateMarkerPosition(lat, lng) {
+        // Update the position of the marker
+        marker.setPosition({
+          lat: lat,
+          lng: lng,
+        });
+
+        // Update the center of the map to the new position
+        map.panTo({
+          lat: lat,
+          lng: lng,
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBV0leErtS7dmiYz-zuz6xvTbWtzLq3TQ&callback=myMap"></script>
+
+    <!-- chart -->
+    <script>
+      var ctx_temp = document.getElementById("tempChart").getContext("2d");
+      var ctx_heart = document.getElementById("heartChart").getContext("2d");
+      var ctx_spo2 = document.getElementById("spo2cChart").getContext("2d");
+      var tempData = {
+        labels: [
+          60, 58, 56, 54, 52, 50, 48, 46, 44, 42, 40, 38, 36, 34, 32, 30, 28,
+          26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0,
+        ],
+        datasets: [
+          {
+            label: "Thân nhiệt (°C)",
+            data: [1, 0, 31, 10, 50, 200, 39, 38],
+            borderColor: "rgb(75, 192, 192)",
+
+            tension: 0.3,
+          },
+        ],
+      };
+      var heartData = {
+        labels: [
+          60, 58, 56, 54, 52, 50, 48, 46, 44, 42, 40, 38, 36, 34, 32, 30, 28,
+          26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0,
+        ],
+        datasets: [
+          {
+            label: "Nhịp tim (lần/phút)",
+            data: [
+              10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+              26, 27, 28, 29, 30, 31, 68, 60,
+            ],
+            borderColor: "rgb(220, 0, 0)",
+            tension: 0.1,
+          },
+        ],
+      };
+      var spo2Data = {
+        labels: [
+          60, 58, 56, 54, 52, 50, 48, 46, 44, 42, 40, 38, 36, 34, 32, 30, 28,
+          26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0,
+        ],
+        datasets: [
+          {
+            label: "Nồng độ Oxy (%)",
+            data: [
+              9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+              26, 27, 28, 29, 30, 31, 92,
+            ],
+            borderColor: "rgb(255, 219, 137)",
+            tension: 0.1,
+          },
+        ],
+      };
+      var tempOption = {
+        // responsive: false,
+        y: {
+          suggestedMin: 35,
+          suggestedMax: 42,
+        },
+      };
+      var heartOption = {
+        // responsive: false,
+        y: {
+          suggestedMin: 50,
+          suggestedMax: 120,
+        },
+      };
+      var spo2Option = {
+        // responsive: false,
+        y: {
+          suggestedMin: 80,
+          suggestedMax: 100,
+        },
+      };
+
+      var tempChart = new Chart(ctx_temp, {
+        type: "line",
+        data: tempData,
+        options: tempOption,
+      });
+
+      var heartChart = new Chart(ctx_heart, {
+        type: "line",
+        data: heartData,
+        options: heartOption,
+      });
+
+      var spo2Chart = new Chart(ctx_spo2, {
+        type: "line",
+        data: spo2Data,
+        options: spo2Option,
+      });
+
+      function setData(dataset, data) {
+        dataset.push(data);
+        dataset.shift();
+      }
+    </script>
+
+    <script>
+      // get data to show in Index
+      document.querySelector("#tempNum").innerHTML =
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1];
+      document.querySelector("#bpmNum").innerHTML =
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1];
+      document.querySelector("#spO2Num").innerHTML =
+        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1];
+      // document.querySelector("#stepsNum").innerHTML =
+      //   distanceData.datasets[0].data[distanceData.datasets[0].data.length - 1];
+
+      // chage the color due the value
+
+      // temp
+      if (
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 40
+      ) {
+        document.querySelector("#temp").style.backgroundColor = "#bf0000";
+        document.querySelector("#temp").style.color = "white";
+      } else if (
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 39
+      ) {
+        document.querySelector("#temp").style.backgroundColor = "#f53131";
+        document.querySelector("#temp").style.color = "black";
+      } else if (
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 38
+      ) {
+        document.querySelector("#temp").style.backgroundColor = "#f06969";
+        document.querySelector("#temp").style.color = "black";
+      } else if (
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 37.5
+      ) {
+        document.querySelector("#temp").style.backgroundColor = "#ffbf00";
+        document.querySelector("#temp").style.color = "black";
+      } else if (
+        tempData.datasets[0].data[tempData.datasets[0].data.length - 1] >= 36
+      ) {
+        document.querySelector("#temp").style.backgroundColor = "#34b257";
+        document.querySelector("#temp").style.color = "black";
+      } else {
+        document.querySelector("#temp").style.backgroundColor = "#bf0000";
+        document.querySelector("#temp").style.color = "white";
+      }
+
+      // heart
+      if (
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 100
+      ) {
+        document.querySelector("#bpm").style.backgroundColor = "#bf0000";
+        document.querySelector("#bpm").style.color = "white";
+      } else if (
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 80
+      ) {
+        document.querySelector("#bpm").style.backgroundColor = "#f53131";
+        document.querySelector("#bpm").style.color = "black";
+      } else if (
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 68
+      ) {
+        document.querySelector("#bpm").style.backgroundColor = "#f06969";
+        document.querySelector("#bpm").style.color = "black";
+      } else if (
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 62
+      ) {
+        document.querySelector("#bpm").style.backgroundColor = "#ffbf00";
+        document.querySelector("#bpm").style.color = "black";
+      } else if (
+        heartData.datasets[0].data[heartData.datasets[0].data.length - 1] >= 54
+      ) {
+        document.querySelector("#bpm").style.backgroundColor = "#34b257";
+        document.querySelector("#bpm").style.color = "black";
+      } else {
+        document.querySelector("#bpm").style.backgroundColor = "#f53131";
+        document.querySelector("#bpm").style.color = "black";
+      }
+
+      // spo2
+      if (
+        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 88
+      ) {
+        document.querySelector("#spO2").style.backgroundColor = "#bf0000";
+        document.querySelector("#spO2").style.color = "white";
+      } else if (
+        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 92
+      ) {
+        document.querySelector("#spO2").style.backgroundColor = "#f53131";
+        document.querySelector("#spO2").style.color = "black";
+      } else if (
+        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 95
+      ) {
+        document.querySelector("#spO2").style.backgroundColor = "#ffbf00";
+        document.querySelector("#spO2").style.color = "black";
+      } else if (
+        spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1] <= 100
+      ) {
+        document.querySelector("#spO2").style.backgroundColor = "#34b257";
+        document.querySelector("#spO2").style.color = "black";
+      } else {
+        document.querySelector("#spO2").style.backgroundColor = "#bf0000";
+        document.querySelector("#spO2").style.color = "white";
+        document.querySelector("#spO2Num").innerHTML = "N/A";
+      }
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
