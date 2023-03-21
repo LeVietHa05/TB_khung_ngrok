@@ -48,7 +48,8 @@
         <!-- banner -->
         <div id="banner">
           <!-- news area -->
-          <div id="news">This is news</div>
+          <div id="news">
+            <iframe width="100%" height="100%" style="border-radius: 2vw;" src="https://www.youtube.com/embed/x9ztPptYteo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
           <!-- index area -->
           <div id="index">
             <div id="inIndex">
@@ -341,8 +342,8 @@
         </p>
       </div>
       <div id="tab4" class="tab-pane">
-        <h2>Tab 4 Content</h2>
-        <p>This is the content for tab 4.</p>
+        <h2>Giới thiệu về dự án</h2>
+        <iframe style="margin: auto;width:80vw; height:60vw" src="https://www.youtube.com/embed/x9ztPptYteo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -372,10 +373,10 @@
 
       const socket = io();
 
-      // const tempInfo = document.getElementById("tempNum");
-      // const heartInfo = document.getElementById("bpmNum");
-      // const spo2Info = document.getElementById("spO2Num");
-      // const distanceInfo = document.getElementById("stepsNum");
+      const tempInfo = document.getElementById("tempNum");
+      const heartInfo = document.getElementById("bpmNum");
+      const spo2Info = document.getElementById("spO2Num");
+      const distanceInfo = document.getElementById("stepsNum");
 
       const phone1Input = document.getElementById("phone1");
       const phone2Input = document.getElementById("phone2");
@@ -417,10 +418,10 @@
 
       socket.on("message", (data) => {
         console.log(data);
-        // tempInfo.innerHTML = data.temp;
-        // heartInfo.innerHTML = data.heart;
-        // spo2Info.innerHTML = data.spo2;
-        // distanceInfo.innerHTML = data.distance;
+        tempInfo.innerHTML = data.temp;
+        heartInfo.innerHTML = data.heart;
+        spo2Info.innerHTML = data.spo2;
+        distanceInfo.innerHTML = data.distance;
         //for map
         if (
           data.lng != null &&
@@ -603,8 +604,6 @@
         heartData.datasets[0].data[heartData.datasets[0].data.length - 1];
       document.querySelector("#spO2Num").innerHTML =
         spo2Data.datasets[0].data[spo2Data.datasets[0].data.length - 1];
-      // document.querySelector("#stepsNum").innerHTML =
-      //   distanceData.datasets[0].data[distanceData.datasets[0].data.length - 1];
 
       // chage the color due the value
 
